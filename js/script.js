@@ -71,6 +71,7 @@ function handleDrop(event) {
 
     event.preventDefault();
     const files = event.dataTransfer.files;
+    let numFilesProcessed = 0;
     for (const file of files) {
         if (file.type === 'text/html') {
             const reader = new FileReader();
