@@ -35,12 +35,19 @@ function processHtmlFile(filename, htmlDoc) {
   }
 
   if (fecha) {
-    if (!dataByDate[fecha]) {
-      dataByDate[fecha] = { l1: 0, l2: 0 };
+    const fechaModificada = restarDias(fecha, 2);
+    if (!dataByDate[fechaModificada]) {
+      dataByDate[fechaModificada] = { l1: 0, l2: 0 };
     }
-    dataByDate[fecha].l1 += l1;
-    dataByDate[fecha].l2 += l2;
+    dataByDate[fechaModificada].l1 += l1;
+    dataByDate[fechaModificada].l2 += l2;
   }
+}
+
+function restarDias(fecha, dias) {
+  const fechaOriginal = moment(fecha, "DD/MM/YYYY");
+  const fechaModificada = fechaOriginal.subtract(dias, "days");
+  return fechaModificada.format("DD/MM/YYYY");
 }
 
 function renderTable() {
